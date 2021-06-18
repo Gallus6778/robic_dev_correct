@@ -1,0 +1,149 @@
+{% extends 'layouts/template.html' %}
+
+{% block style %}
+<style>
+    table, td, th {
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even){background-color: #f2f2f2}
+
+    th {
+        background-color: #1a2226;
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{# -------------------------------------- Debut de la page ------------------------------------------------ #}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style="font-size:20px">
+    <li class="breadcrumb-item"><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Call complaints</li>
+  </ol>
+</nav>
+{% if error %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-danger" style="text-align:center;font-weight:bold;font-size:20px;" role="alert">
+                    {{ error }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% if msisdn %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 style="font-size:30px;font-weight:bold; text-align:center; padding-top:10px;">Check msisdn call problems</h1>
+                <br>
+                <form method="POST" action="{{ url_for('call_complaints') }}">
+                    {{ msisdnForm.hidden_tag() }}
+                    {{ msisdnForm.msisdn.label(class="form-label", style="font-size:20px;")}}
+
+                    {{ msisdnForm.msisdn(class="form-control", style="font-size:20px;height:40px;", placeholder="Example=237669595858") }}
+                    <br>
+                    {{ msisdnForm.submit(class="btn btn-danger", style="font-size:20px;height:40px;") }}
+                </form>
+            </div>
+        </div>
+    </div>
+<hr style="border:1px solid gray">
+    <div class="container-fluid" style="font-size:20px;">
+        <div class="row">
+            <div class="col-12">
+                <center>
+                    <h1 style="font-size:25px;font-weight:bold; text-align:center; padding-top:-20px;">HLR informations of the subscriber: {{ msisdn }}</h1>
+
+                    <table>
+                      <tr>
+                          <th scope="col">odboc</th>
+                          <th scope="col">odbic</th>
+                          <th scope="col">odbr</th>
+                          <th scope="col">cfu</th>
+                          <th scope="col">cfb</th>
+                          <th scope="col">cfnrc</th>
+                          <th scope="col">cfnry</th>
+                          <th scope="col">isActiveIMSI</th>
+                          <th scope="col">isdnNumberOfVLR</th>
+                          <th scope="col">YAMS01</th>
+                          <th scope="col">YAMS02</th>
+                          <th scope="col">DOMS01</th>
+                          <th scope="col">DOMS02</th>
+                      </tr>
+                      <tr>
+                          <td>{{ msisdn_info_results['odboc'] }}</td>
+                          <td>{{ msisdn_info_results['odbic'] }}</td>
+                          <td>{{ msisdn_info_results['odbr'] }}</td>
+                          <td>{{ msisdn_info_results['cfu'] }}</td>
+                          <td>{{ msisdn_info_results['cfb'] }}</td>
+                          <td>{{ msisdn_info_results['cfnrc'] }}</td>
+                          <td>{{ msisdn_info_results['cfnry'] }}</td>
+                          <td>{{ msisdn_info_results['isActiveIMSI'] }}</td>
+                          <td>{{ msisdn_info_results['isdnNumberOfVLR'] }}</td>
+                          <td>{{ msisdn_info_results['YAMS01'] }}</td>
+                          <td>{{ msisdn_info_results['YAMS02'] }}</td>
+                          <td>{{ msisdn_info_results['DOMS01'] }}</td>
+                          <td>{{ msisdn_info_results['DOMS02'] }}</td>
+
+                      </tr>
+                    </table>
+                </center>
+<!--                ------------------------------------------------------------                -->
+                <hr style="border:1px solid gray">
+                <center>
+                    <h1 style="font-size:25px;font-weight:bold; text-align:center; padding-top:-20px;">Proposed resolution</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                {% for key, value in decision.items() %}
+                                <th scope="col">{{ key }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {% for key, value in decision.items() %}
+                                <td>{{ value }}</td>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </center>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 style="font-size:30px;font-weight:bold; text-align:center; padding-top:10px;">Check msisdn call problems</h1>
+                <br>
+                <form method="POST" action="{{ url_for('call_complaints') }}">
+                    {{ msisdnForm.hidden_tag() }}
+                    {{ msisdnForm.msisdn.label(class="form-label", style="font-size:20px;")}}
+
+                    {{ msisdnForm.msisdn(class="form-control", style="font-size:20px;height:40px;", placeholder="Example=237669595858") }}
+                    <br>
+                    {{ msisdnForm.submit(class="btn btn-danger", style="font-size:20px;height:40px;") }}
+                </form>
+            </div>
+        </div>
+    </div>
+<hr style="border:1px solid gray">
+{% endif %}
+{% endblock %}

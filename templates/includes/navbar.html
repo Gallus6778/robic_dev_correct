@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary2">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="container">
+              <div class="row">
+                  <div class="col" style="margin:auto">
+                  <ul class="navbar-nav">
+                      <li class="nav-item active">
+                          <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                      </li>
+                      <li class="nav-item active">
+                          <a class="nav-link" href="{{ url_for('internet_complaints') }}">Net Connexion Complaints |</a>
+                      </li>
+                      <li class="nav-item active">
+                          <a class="nav-link" href="{{ url_for('calls_complaints') }}">Calls Complaints |</a>
+                      </li>
+                      <li class="nav-item active">
+                          <a class="nav-link" href="{{ url_for('sms_complaints') }}">SMS Complaints |</a>
+                      </li>
+                  </ul>
+                  </div>
+              </div>
+          </div>
+          <form class="form-inline my-2 my-lg-0">
+{#            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
+{#            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+              <img src="{{  url_for('static', filename='img/nexttel_img.jpg') }}" alt="logo_nexttel" width="130" height="60">
+
+          </form>
+    </div>
+</nav>

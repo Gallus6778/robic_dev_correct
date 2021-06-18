@@ -1,0 +1,11 @@
+<ns0:Envelope xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="urn:siemens:names:prov:gw:SPML:2:0">
+   <ns0:Body>
+      <ns1:searchRequest execution="synchronous">
+         <version>HLR_SUBSCRIBER_v45</version>
+         <base>
+            <objectclass>Subscriber</objectclass>
+            <alias name="msisdn" value="237660351232" />
+         </base>
+      </ns1:searchRequest>
+   </ns0:Body>
+</ns0:Envelope>

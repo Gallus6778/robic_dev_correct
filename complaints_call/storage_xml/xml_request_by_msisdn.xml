@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XM LSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <soapenv:Body>
+      <spml:searchRequest execution="synchronous" xmlns:spml="urn:siemens:names:prov:gw:SPML:2:0">
+         <version>HLR_SUBSCRIBER_v45</version>
+         <base>
+            <objectclass>Subscriber</objectclass>
+            <alias name="msisdn" value="msisdn_value"/>
+         </base>
+      </spml:searchRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

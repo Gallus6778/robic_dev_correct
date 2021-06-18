@@ -1,0 +1,188 @@
+{% extends 'layouts/template.html' %}
+
+{% block style %}
+<style>
+    table, td, th {
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even){background-color: #f2f2f2}
+
+    th {
+        background-color: #1a2226;
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+{# -------------------------------------- Debut de la page ------------------------------------------------ #}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style="font-size:20px">
+    <li class="breadcrumb-item"><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Internet complaints</li>
+  </ol>
+</nav>
+{% if error %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-danger" style="text-align:center;font-weight:bold;font-size:20px;" role="alert">
+                    {{ error }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% if msisdn %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 style="font-size:30px;font-weight:bold; text-align:center; padding-top:10px;">Check msisdn internet problems</h1>
+                <br>
+                <form method="POST" action="{{ url_for('internet_complaints') }}">
+                    {{ msisdnForm.hidden_tag() }}
+                    {{ msisdnForm.msisdn.label(class="form-label", style="font-size:20px;")}}
+
+                    {{ msisdnForm.msisdn(class="form-control", style="font-size:20px;height:40px;", placeholder="Example=237669595858") }}
+                    <br>
+                    {{ msisdnForm.submit(class="btn btn-danger", style="font-size:20px;height:40px;") }}
+                </form>
+            </div>
+        </div>
+    </div>
+<hr style="border:1px solid gray">
+    <div class="container-fluid" style="font-size:20px;">
+        <div class="row">
+            <div class="col-12">
+                <center>
+                    <h1 style="font-size:25px;font-weight:bold; text-align:center; padding-top:-20px;">HLR informations of the subscriber: {{ msisdn }}</h1>
+
+                    <table>
+                      <tr>
+<!--                          <th scope="col">imsiActive</th>-->
+                          <th scope="col">accTypeGSM</th>
+                          <th scope="col">accTypeGERAN</th>
+                          <th scope="col">accTypeUTRAN</th>
+<!--                          <th scope="col">odboc</th>-->
+<!--                          <th scope="col">odbic</th>-->
+<!--                          <th scope="col">odbr</th>-->
+<!--                          <th scope="col">odboprc</th>-->
+<!--                          <th scope="col">odbssm</th>-->
+                          <th scope="col">odbgprs</th>
+<!--                          <th scope="col">odbsci</th>-->
+                          <th scope="col">isActiveIMSI</th>
+                          <th scope="col">actIMSIGprs</th>
+<!--                          <th scope="col">obGprs</th>-->
+                          <th scope="col">Qos</th>
+                          <th scope="col">APN</th>
+                          <th scope="col">ldapResponse</th>
+                      </tr>
+                      <tr>
+<!--                          <td>{{ msisdn_info_results['imsiActive'] }}</td>-->
+                          <td>{{ msisdn_info_results['accTypeGSM'] }}</td>
+                          <td>{{ msisdn_info_results['accTypeGERAN'] }}</td>
+                          <td>{{ msisdn_info_results['accTypeUTRAN'] }}</td>
+<!--                          <td>{{ msisdn_info_results['odboc'] }}</td>-->
+<!--                          <td>{{ msisdn_info_results['odbic'] }}</td>-->
+<!--                          <td>{{ msisdn_info_results['odbr'] }}</td>-->
+<!--                          <td>{{ msisdn_info_results['odboprc'] }}</td>-->
+<!--                          <td>{{ msisdn_info_results['odbssm'] }}</td>-->
+                          <td>{{ msisdn_info_results['odbgprs'] }}</td>
+<!--                          <td>{{ msisdn_info_results['odbsci'] }}</td>-->
+                          <td>{{ msisdn_info_results['isActiveIMSI'] }}</td>
+                          <td>{{ msisdn_info_results['actIMSIGprs'] }}</td>
+<!--                          <td>{{ msisdn_info_results['obGprs'] }}</td>-->
+                          <td>{{ msisdn_info_results['qosProfile'] }}</td>
+                          <td>{{ msisdn_info_results['refPdpContextName'] }}</td>
+                          {% if msisdn_info_results['ldapResponse'] == 'None' %}
+                          <td>{{ msisdn_info_results['ldapResponse'] }}</td>
+                          {% else %}
+                          <td>Unknow subscriber in HLR</td>
+                          {% endif %}
+                      </tr>
+                    </table>
+                </center>
+<!--                ------------------------------------------------------------                -->
+                <hr style="border:1px solid gray">
+                <center>
+                    <h1 style="font-size:25px;font-weight:bold; text-align:center; padding-top:-20px;">SGSN informations of the subscriber: {{ msisdn }}</h1>
+                    <table style="font-size:20px;">
+                          <thead>
+                            <tr>
+                                <th scope="col">msisdn</th>
+                                <th scope="col">RADIO ACCESS TYPE</th>
+                                <th scope="col">PDP STATE</th>
+                                <th scope="col">TERMINAL TYPE</th>
+                                <th scope="col">LAC</th>
+                                <th scope="col">CI</th>
+                                <th scope="col">SUBSCRIBER</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                                <td>{{ msisdn }}</td>
+                                <td>{{ radio_access_type }}</td>
+                                <td>{{ pdp_state }}</td>
+                                <td>{{ terminal_type }}</td>
+                                <td>{{ lac }}</td>
+                                <td>{{ ci }}</td>
+
+                            </tr>
+                          </tbody>
+                    </table>
+                </center>
+<hr style="border:1px solid gray">
+                <center>
+                    <h1 style="font-size:25px;font-weight:bold; text-align:center; padding-top:-20px;">Proposed resolution</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                {% for key, value in msisdn1.items() %}
+                                <th scope="col">{{ key }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {% for key, value in msisdn1.items() %}
+                                <td>{{ value }}</td>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </center>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 style="font-size:30px;font-weight:bold; text-align:center; padding-top:10px;">Check for internet connexion by using only the msisdn</h1>
+                <br>
+                <form method="POST" action="{{ url_for('internet_complaints') }}">
+                    {{ msisdnForm.hidden_tag() }}
+                    {{ msisdnForm.msisdn.label(class="form-label", style="font-size:20px;")}}
+
+                    {{ msisdnForm.msisdn(class="form-control", style="font-size:20px;height:40px;", placeholder="Example=237669595858") }}
+                    <br>
+                    {{ msisdnForm.submit(class="btn btn-danger", style="font-size:20px;height:40px;") }}
+                </form>
+            </div>
+        </div>
+    </div>
+<hr style="border:1px solid gray">
+{% endif %}
+{% endblock %}

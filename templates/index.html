@@ -1,0 +1,42 @@
+{% extends 'layouts/template.html' %}
+
+{% block style %}
+<style>
+</style>
+{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style="font-size:20px">
+    <li class="breadcrumb-item active" aria-current="page">Home</li>
+  </ol>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="div col-12" style="margin:100px">
+            <center>
+                <h1>Welcome to RobIC plateform</h1>
+                <img class="img" src="{{ url_for('static', filename='img/icon.png') }}" class="user-image" style="border-radius:70px;width:140px;height:140px; margin-top:260px" alt="User Image" />
+
+                <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+                <script type="text/javascript">
+                    let tl = anime.timeline({
+                        duration: 3250
+                    })
+                    let tl2 = anime.timeline({
+                        duration: 1250
+                    })
+                    tl.add({
+                        targets: 'h1',
+                        translateY: '200%'
+                    })
+                    tl2.add({
+                        targets: '.img',
+                        translateY: '-100%'
+                    })
+                </script>
+            </center>
+        </div>
+    </div>
+</div>
+{% endblock %}
