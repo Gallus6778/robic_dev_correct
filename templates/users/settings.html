@@ -1,0 +1,48 @@
+{% extends 'layouts/template.html' %}
+
+{% block style %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb" style="font-size:20px">
+    <li class="breadcrumb-item"><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Settings</li>
+  </ol>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <center><h1>Edit your profile</h1></center>
+            <hr style="border:1px solid gray">
+<!--            -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4" style="border-right:2px solid black">
+                        <center>
+                            <img src="{{ url_for('static', filename='admin/dist/img/avatar5.png') }}" class="user-image" style="border-radius:70px;width:140px;height:140px" alt="User Image" />
+                            <br><b><span class="hidden-xs" style="padding:14px;font-size:18px">{{ g.User.username }}</span></b>
+                            <form action="" method="post">
+                              <div class="form-group">
+                                  <br>
+                                <input type="file" class="form-control" id="exampleFormControlFile1">
+                                  <br>
+                                  <button type="submit" class="btn" style="background:#d73925; color:#fff">
+                                      <i class="fas fas-user"></i>
+                                      Submit
+                                  </button>
+                              </div>
+                            </form>
+                        </center>
+                    </div>
+                    <div class="col-md-8">yunsildoimo</div>
+                </div>
+            </div>
+<!--            -->
+        </div>
+    </div>
+</div>
+{% endblock %}

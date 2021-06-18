@@ -253,3 +253,8 @@ def call_complaints():
             return render_template('complaints_call/index.html', error=error, msisdnForm=msisdnForm)
 
     return render_template('complaints_call/index.html', msisdnForm = msisdnForm)
+
+@app.route('/settings', methods=['GET', 'POST'])
+@login_required
+def settings():
+    return render_template('users/settings.html')

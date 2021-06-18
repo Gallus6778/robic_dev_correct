@@ -28,7 +28,7 @@ ENTER USERNAME <  MSCBOT
 
 ENTER PASSWORD <  *********
 
-MSCi      YAMS01                    2021-06-18  12:05:35
+MSCi      YAMS01                    2021-06-18  13:48:50
 
 
 
@@ -51,12 +51,12 @@ MSCi      YAMS01                    2021-06-18  12:05:35
 
 
 MAIN LEVEL COMMAND <___>
-<  ZMVO:MSISDN=237669595850:;
+<  ZMVO:MSISDN=237669595858:;
 
 
 LOADING PROGRAM VERSION 24.120-0
 
-MSCi      YAMS01                    2021-06-18  12:05:35
+MSCi      YAMS01                    2021-06-18  13:48:50
 
 /*** DX ERROR: 196613 ***/
 /*** UNKNOWN SUBSCRIBER ***/
