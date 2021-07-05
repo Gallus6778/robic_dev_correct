@@ -31,3 +31,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" %_OLD_CODEPAGE% > nul
     set _OLD_CODEPAGE=
 )
+cd C:\Users\NOAH GALLUS\PycharmProjects\robic_dev_correct\
+:: py socketServer.py
+flask run --host 192.168.1.9 --port 8999
+::pause

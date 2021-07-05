@@ -1,91 +1,77 @@
 #!/usr/bin/env python
-# importation du module qui fera l'extraction du xml depuis la HLR pour les Complaints_internet
-from Complaints_internet.soap_module import Soap_class
-# importation du module qui fera le tri de donnees du xml pour l'ajouter dans le dataset
-import Complaints_internet.dataset_enrichment as read_xml
-# importation du module qui fera l'extraction du log depuis la SGSN pour les Complaints_internet
-from Complaints_internet import sgsn_info_module
-# importation du module qui identifiera et corrigera depuis la SGSN et la HLR les Complaints_internet
-from Complaints_internet.correct_complaints_module import Info_hlr
 
-# msisdn_info_results = {'imsi' : 'None',
-#                            'encKey' : 'None',
-#                            'algoId' : 'None',
-#                            'kdbId' : 'None',
-#                            'acsub' : 'None',
-#                            'imsiActive' : 'None',
-#                            'accTypeGSM' : 'None',
-#                            'accTypeGERAN' : 'None',
-#                            'accTypeUTRAN' : 'None',
-#                            'odboc' : 'None',
-#                            'odbic' : 'None',
-#                            'odbr' : 'None',
-#                            'odboprc' : 'None',
-#                            'odbssm' : 'None',
-#                            'odbgprs' : 'None',
-#                            'odbsci' : 'None',
-#                            'isActiveIMSI' : 'None',
-#                            'msisdn' : 'None',
-#                            'actIMSIGprs' : 'None',
-#                            'obGprs' : 'None',
-#                            'qosProfile' : 'None',
-#                            'refPdpContextName' : 'None',
-#                            'imeisv' : 'None',
-#                            'ldapResponse' : 'None'}
+import re, openpyxl
+# -------------------------COMPLAINTS INTERNET------------------------------------------------------
+#   IMPORT MODULE WHICH WILL SEND AND RETURN XML FILE RESPONSE OF HLR   #
+
+from complaints_internet.hlr_module import Soap_class
+
+#   IMPORT MODULE WHICH WILL READ XML FILE RESPONSE OF HLR   #
+from complaints_internet.read_xml_module import Read_request_by_msisdn
+
+#   IMPORT MODULE WHICH WILL CHECK HLR AND PROVIDE DECISIONS   #
+from complaints_internet.corrections_module import Check_hlr_info_and_provide_decision as provide_decision
+
+#   IMPORT MODULE WHICH WILL SEND AND RETURN LOG FILE RESPONSE OF SGSN   #
+from complaints_internet.sgsn_module import Telnet_sgsn
+
+#   IMPORT MODULE WHICH WILL SEND AND RETURN LOG FILE RESPONSE OF SGSN   #
+from complaints_internet.read_log_module import Read_sgsn_log
 
 class Pas_internet:
     def __init__(self, msisdn):
         self.msisdn = msisdn
-        self.msisdn_info_results = {'imsi': 'None',
-                               'encKey': 'None',
-                               'algoId': 'None',
-                               'kdbId': 'None',
-                               'acsub': 'None',
-                               'imsiActive': 'None',
-                               'accTypeGSM': 'None',
-                               'accTypeGERAN': 'None',
-                               'accTypeUTRAN': 'None',
-                               'odboc': 'None',
-                               'odbic': 'None',
-                               'odbr': 'None',
-                               'odboprc': 'None',
-                               'odbssm': 'None',
-                               'odbgprs': 'None',
-                               'odbsci': 'None',
-                               'isActiveIMSI': 'None',
-                               'msisdn': 'None',
-                               'actIMSIGprs': 'None',
-                               'obGprs': 'None',
-                               'qosProfile': 'None',
-                               'refPdpContextName': 'None',
-                               'imeisv': 'None',
+        self.msisdn_info_results = {'imsi': 'None', 'encKey': 'None', 'algoId': 'None', 'kdbId': 'None', 'acsub': 'None',
+                               'imsiActive': 'None', 'accTypeGSM': 'None', 'accTypeGERAN': 'None',
+                               'accTypeUTRAN': 'None', 'odboc': 'None', 'odbic': 'None', 'odbr': 'None',
+                               'odboprc': 'None', 'odbssm': 'None', 'odbgprs': 'None', 'odbsci': 'None',
+                               'isActiveIMSI': 'None', 'msisdn': 'None', 'actIMSIGprs': 'None', 'obGprs': 'None',
+                               'qosProfile': 'None', 'refPdpContextName': 'None', 'imeisv': 'None',
                                'ldapResponse': 'None'}
 
     def main(self):
-        msisdn = Soap_class(msisdn=self.msisdn)
-        soap_xml_filename = msisdn.main()
+        if re.match('^[0-9]*$', self.msisdn):
+            # Recuperation des inforamtions de l'abonne dans la HLR pour Complaints_internet
+            msisdn = Soap_class(msisdn=self.msisdn)
+            xml_reveived_from_hlr = msisdn.main()
 
-        # sgsn_info_module.main(msisdn_form)
+            # Recuperation des inforamtions de l'abonne dans la SGSN pour Complaints_internet
+            log_from_sgsn = Telnet_sgsn(msisdn=self.msisdn).main()
+            xlsx_sgsn_info = Read_sgsn_log(sgsn_log_file=log_from_sgsn)
+            xlsx_sgsn_info.txt_reader()
+            xlsx_sgsn_info = xlsx_sgsn_info.xlsx_writter()
+            workbook = openpyxl.load_workbook(filename=xlsx_sgsn_info)
 
-        # Enrichissement du dataset avec des inforamtions de l'abonne dans la Complaints_internet (ce dernier modifiera le contenu du dictionnaire )
-        try:
-            # read_xml.put_data_in_dataset(soap_thread(msisdn_form), msisdn_info_results)
-            read_xml.put_data_in_dataset(soap_xml_filename, self.msisdn_info_results)
-        except:
-            messageErreur = 'Error -> file not closed:-) You must first closed the "dataset_internet.xlsx" file !'
-            return messageErreur
+            sheet = workbook.active
+            dict = {}
 
-        # Recuperation des inforamtions de l'abonne dans la SGSN pour Complaints_internet
-        # zmmi_command = zmmi_zmmo_zmms_class(msisdn)
-        # zmmi_command.main()
+            radio_access_type = sheet['C2'].value
+            pdp_state = sheet["D2"].value
+            terminal_type = sheet["E2"].value
+            lac = sheet["F2"].value
+            ci = sheet["G2"].value
 
-        # ============================= Correction du probleme ===========================
-        subscriber_info = Info_hlr()
-        info_parameter = subscriber_info.main()
+            # Enrichissement du dataset avec des inforamtions de l'abonne dans la Complaints_internet (ce dernier modifiera le contenu du dictionnaire )
+            try:
+                Read_request_by_msisdn(xml_reveive_from_hlr=xml_reveived_from_hlr,
+                                       msisdn_info_results=self.msisdn_info_results).put_data_in_dataset()
+            except:
+                messageErreur = 'Error -> file not closed:-) You must first closed the "dataset_internet.xlsx" file !'
+                return messageErreur
 
-        message_ack = ''
-        for keys, values in info_parameter.items():
-            message_ack = message_ack + keys + ":" + values + ";"
+            # ============================= Correction du probleme ===========================
+            subscriber_info = provide_decision()
+            info_parameter = subscriber_info.main()
 
-        # return info_parameter
-        return message_ack
+            message_ack = ''
+            for keys, values in info_parameter.items():
+                message_ack = message_ack + keys + ":" + values + ";"
+
+            # return info_parameter
+            return message_ack
+
+        else:
+            error = "Sorry, the msisdn should be a number only !!!"
+            return error
+
+

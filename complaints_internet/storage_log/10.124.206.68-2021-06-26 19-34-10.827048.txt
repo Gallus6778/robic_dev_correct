@@ -1,0 +1,99 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ENTER USERNAME <  CHATBO
+
+ENTER PASSWORD <  **********
+
+SGSN      YASG01                    2021-06-26  18:34:13
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                       WELCOME TO THE DX 200 SERIES DIALOGUE
+
+
+
+
+
+MAIN LEVEL COMMAND <___>
+<  ZMMI:MSISDN=2222:;
+
+
+LOADING PROGRAM VERSION 13.16-0
+
+SGSN      YASG01                    2021-06-26  18:34:13
+
+/*** DX ERROR: 196613 ***/
+/*** UNKNOWN SUBSCRIBER ***/
+
+COMMAND EXECUTED
+
+
+VISITING GPRS SUBSCRIBER DATA HANDLING COMMAND <MM_>
+<  ZMMO:MSISDN=2222:;
+
+LOADING PROGRAM VERSION 13.16-0
+
+SGSN      YASG01                    2021-06-26  18:34:13
+
+/*** DX ERROR: 196613 ***/
+/*** UNKNOWN SUBSCRIBER ***/
+
+COMMAND EXECUTION FAILED 
+
+VISITING GPRS SUBSCRIBER DATA HANDLING COMMAND <MM_>
+<  ZMMS:MSISDN=2222:;
+
+LOADING PROGRAM VERSION 13.16-0
+
+SGSN      YASG01                    2021-06-26  18:34:13
+
+/*** DX ERROR: 196613 ***/
+/*** UNKNOWN SUBSCRIBER ***/
+
+COMMAND EXECUTION FAILED 
+
+VISITING GPRS SUBSCRIBER DATA HANDLING COMMAND <MM_>
+<  Z;
+
+MAIN LEVEL COMMAND <___>
+<  ZZ;
+
+
+END OF DIALOGUE SESSION
+

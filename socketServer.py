@@ -12,10 +12,12 @@ class ClientThread(threading.Thread):
     def __init__(self,clientAddress,clientsocket):
         threading.Thread.__init__(self)
         self.csocket = clientsocket
+        self.transcription = 'None'
         
     def run(self):
         #self.csocket.send(bytes("Hi, This is from Server..",'utf-8'))
         msg = ''
+        transcription = self.transcription
         while True:
             data = self.csocket.recv(2048)
             msg = data.decode("utf8")
@@ -37,12 +39,11 @@ class ClientThread(threading.Thread):
                 # for keys, values in transcription.items():
                 #     message_ack = message_ack + keys + ":" + values +";"
             elif reponse[1] == 'li':
-                message_ack = 'lenteur internet a resoudre tres bientot'
-                # pas_internet = pi(reponse[0])
-                # transcription = pas_internet.main()
-                #
-                # for keys, values in transcription:
-                #     message_ack = message_ack + keys + ":" +values +";"
+                pas_internet = pi(reponse[0])
+                print(reponse)
+                print(reponse[0])
+                print(type(reponse[0]))
+                transcription = pas_internet.main()
             elif reponse[1] == 'ae':
                 message_ack = 'appel entrant a resoudre tres bientot'
             elif reponse[1] == 'as':
@@ -60,7 +61,7 @@ class ClientThread(threading.Thread):
         print ("Client at ", clientAddress , " disconnected...")
 
 # ==================changer l'adresse ip de la machine dans le reseau=========================================
-LOCALHOST = "192.168.1.3"
+LOCALHOST = "192.168.1.4"
 PORT = 12101
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
