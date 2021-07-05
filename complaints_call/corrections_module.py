@@ -1,5 +1,7 @@
 import openpyxl
 import xlsxwriter
+from complaints_correction.correct_obic import Obic
+from complaints_correction.correct_oboc import Oboc
 
 class Check_hlr_info_and_provide_decision:
     def __init__(self):
@@ -42,9 +44,8 @@ class Check_hlr_info_and_provide_decision:
             if subscriber_info['isActiveIMSI'] == "true":
                 if subscriber_info["odboc"] != "0" or subscriber_info["odboc"] == "None":
                     if subscriber_info["odboc"] != "0" and subscriber_info["odboc"] != "None":
+                        Oboc(msisdn=subscriber_info['msisdn']).main()
                         self.info_parameter["odboc"] = "Barring oc in HLR"
-                    elif subscriber_info["odboc"] == "None":
-                        self.info_parameter["odboc"] = "Barring oc not defined"
                 #
                 for keys, value in subscriber_exists_in_msc.items():
                     if value == 'KNOWN SUBSCRIBER':
@@ -56,9 +57,8 @@ class Check_hlr_info_and_provide_decision:
                 #
                 if subscriber_info["odbic"] != "0" or subscriber_info["odbic"] == "None":
                     if subscriber_info["odbic"] != "0" and subscriber_info["odbic"] != "None":
+                        Obic(msisdn=subscriber_info['msisdn']).main()
                         self.info_parameter["odbic"] = "Barring ic in HLR"
-                    elif subscriber_info["odbic"] == "None":
-                        self.info_parameter["odbic"] = "Barring ic not defined"
                 #
                 if subscriber_info["odbr"] != "0" or subscriber_info["odbr"] == "None":
                     if subscriber_info["odbr"] != "0" and subscriber_info["odbr"] != "None":
@@ -85,7 +85,7 @@ class Check_hlr_info_and_provide_decision:
                     subscriber_info["odbr"] == "0") and (subscriber_info['isActiveIMSI'] == "true") and subscriber_info[
                 'cfnry'] == "None" and subscriber_info['cfnrc'] == "None" and subscriber_info['cfb'] == "None" and \
                     subscriber_info['cfu'] == "None" and number_of_msc_where_subscriber_exists <= 1:
-                self.info_parameter["result"] = "Everything is ok in HLR"
+                self.info_parameter["result"] = "ok"
 
 
             # Ecrire l'action a mener dans le fichier dataset_call.xlsx

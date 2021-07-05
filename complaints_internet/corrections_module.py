@@ -1,5 +1,6 @@
 import openpyxl
 import xlsxwriter
+from complaints_correction.correct_odbgprs import Odbgprs
 
 class Check_hlr_info_and_provide_decision:
     def __init__(self):
@@ -46,8 +47,10 @@ class Check_hlr_info_and_provide_decision:
 
             if subscriber_info["odbgprs"] != "0" or subscriber_info["odbgprs"] == "None":
                 if subscriber_info["odbgprs"] != "0" and subscriber_info["odbgprs"] != "None":
+                    Odbgprs(msisdn=subscriber_info['msisdn']).main()
                     self.info_parameter["odbgprs"] = "Barring GPRS is True in HLR"
                 elif subscriber_info["odbgprs"] == "None":
+
                     self.info_parameter["odbgprs"] = "Barring GPRS is not defined"
             #
             if subscriber_info["refPdpContextName"] == "None" or subscriber_info["refPdpContextName"] not in list_apn:

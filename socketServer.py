@@ -52,16 +52,24 @@ class ClientThread(threading.Thread):
                 message_ack = 'pb sms a resoudre tres bientot'
             else:
                 message_ack = 'probleme non specifie'
-            # ===========================================================
+            # ============================================================================
+            print("# =======================================================================\n")
+            if transcription == "result:Everything is ok":
+                print("No problem found")
+            else:
+                print("Problem(s) found -> " + transcription + "=")
+            print("Solved with success")
+            print("\n# =======================================================================")
 
-            # message_emis = message_ack.encode("utf8")
+            # ============================================================================
+
             message_emis = transcription.encode("utf8")
 
             self.csocket.send(message_emis)
         print ("Client at ", clientAddress , " disconnected...")
 
 # ==================changer l'adresse ip de la machine dans le reseau=========================================
-LOCALHOST = "192.168.1.4"
+LOCALHOST = "192.168.1.5"
 PORT = 12101
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)

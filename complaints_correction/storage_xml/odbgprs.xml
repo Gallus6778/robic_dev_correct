@@ -1,0 +1,18 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="http://soapadapter.provgw">
+   <soapenv:Header/>
+   <soapenv:Body>
+     <spml:batchRequest execution="synchronous" onError="resume" processing="parallel" xmlns:spml="urn:siemens:names:prov:gw:SPML:2:0" xmlns:subscriber="urn:siemens:names:prov:gw:HLR_SUBSCRIBER:4:5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<version>HLR_SUBSCRIBER_v45</version>
+	<request xmlns:spml="urn:siemens:names:prov:gw:SPML:2:0" xmlns:subscriber="urn:siemens:names:prov:gw:HLR_SUBSCRIBER:4:5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="spml:ModifyRequest">
+		<version xmlns:nsr="urn:siemens:names:prov:gw:HLR_NSR:2:1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">HLR_SUBSCRIBER_v45</version>
+		<objectclass xmlns:nsr="urn:siemens:names:prov:gw:HLR_NSR:2:1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Subscriber</objectclass>
+		<identifier alias="msisdn" xmlns:nsr="urn:siemens:names:prov:gw:HLR_NSR:2:1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="subscriber:SubscriberIdentifier">msisdn_to_change</identifier>
+		<modification name="hlr" operation="addorset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<valueObject xsi:type="subscriber:HLR">
+				<odbgprs>0</odbgprs>
+			</valueObject>
+		</modification>
+	</request>
+	</spml:batchRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
