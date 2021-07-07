@@ -1,6 +1,9 @@
 import openpyxl
 import xlsxwriter
 from complaints_correction.correct_odbgprs import Odbgprs
+from complaints_correction.correct_apn import Apn
+from complaints_correction.correct_qos import Qos
+from complaints_correction.correct_gprs_profile import Gprs_profile
 
 class Check_hlr_info_and_provide_decision:
     def __init__(self):
@@ -48,29 +51,34 @@ class Check_hlr_info_and_provide_decision:
             if subscriber_info["odbgprs"] != "0" or subscriber_info["odbgprs"] == "None":
                 if subscriber_info["odbgprs"] != "0" and subscriber_info["odbgprs"] != "None":
                     Odbgprs(msisdn=subscriber_info['msisdn']).main()
-                    self.info_parameter["odbgprs"] = "Barring GPRS is True in HLR"
+                    self.info_parameter["odbgprs"] = "barring_gprs solved"
                 elif subscriber_info["odbgprs"] == "None":
-
-                    self.info_parameter["odbgprs"] = "Barring GPRS is not defined"
+                    Gprs_profile(msisdn=subscriber_info['msisdn']).main()
+                    self.info_parameter["odbgprs"] = "barring_gprs_not_defined -> solved"
             #
             if subscriber_info["refPdpContextName"] == "None" or subscriber_info["refPdpContextName"] not in list_apn:
                 if subscriber_info["refPdpContextName"] == "None":
-                    self.info_parameter["refPdpContextName"] = "APN is not defined"
+                    Gprs_profile(msisdn=subscriber_info['msisdn']).main()
+                    self.info_parameter["refPdpContextName"] = "APN is not defined -> solved"
                 elif subscriber_info["refPdpContextName"] not in list_apn:
                     if subscriber_info["refPdpContextName"] == "b-connect":
                         self.info_parameter["refPdpContextName"] = "APN=b-connect, pre-configured sim, unable to access to internet"
                     elif subscriber_info["refPdpContextName"] == "n-wap":
-                        self.info_parameter["refPdpContextName"] = "APN=n-wap, change to n-internet"
+                        Apn(msisdn=subscriber_info['msisdn']).main()
+                        self.info_parameter["refPdpContextName"] = "APN=n-wap, change to n-internet -> solved"
                     elif subscriber_info["refPdpContextName"] == "n-mms":
-                        self.info_parameter["refPdpContextName"] = "APN=n-mms, change to n-internet"
+                        Apn(msisdn=subscriber_info['msisdn']).main()
+                        self.info_parameter["refPdpContextName"] = "APN=n-mms, change to n-internet -> solved"
                     else :
                         self.info_parameter["refPdpContextName"] = "APN is "+ subscriber_info["refPdpContextName"] + ", contact assistant"
             #
             if subscriber_info["qosProfile"] == "None" or subscriber_info['qosProfile'] not in ['QoS-R7', 'GOLD', 'SILVER', 'COPPER']:
                 if subscriber_info["qosProfile"] == "None":
+                    Gprs_profile(msisdn=subscriber_info['msisdn']).main()
                     self.info_parameter["qosProfile"] = "QoS is not defined"
                 elif subscriber_info['qosProfile'] not in ['QoS-R7', 'GOLD', 'SILVER', 'COPPER']:
-                    self.info_parameter["qosProfile"] = "QoS " + subscriber_info['qosProfile'] + " is not good, Change to QoS-R7"
+                    Qos(msisdn=subscriber_info['msisdn']).main()
+                    self.info_parameter["qosProfile"] = "QoS " + subscriber_info['qosProfile'] + " is not good -> solved"
             if subscriber_info['actIMSIGprs'] == "false":
                 self.info_parameter["actIMSIGprs"] = "actIMSIGprs is " + subscriber_info['actIMSIGprs'] + ". Restart phone"
             if subscriber_info['isActiveIMSI'] == "false":
@@ -78,7 +86,7 @@ class Check_hlr_info_and_provide_decision:
 
             #
             if (subscriber_info['qosProfile'] in ['QoS-R7', 'GOLD', 'SILVER', 'COPPER']) and (subscriber_info["refPdpContextName"] in list_apn) and (subscriber_info["odbgprs"] == "0") and (subscriber_info['actIMSIGprs'] == "true"):
-                self.info_parameter["result"] = "Everything is ok"
+                self.info_parameter["result"] = "no problem found"
 
             # Ecrire l'action a mener dans le fichier dataset_internet.xlsx
             values = ''

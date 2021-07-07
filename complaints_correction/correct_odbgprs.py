@@ -7,3 +7,7 @@ class Odbgprs:
 
     def main(self):
         msisdn_to_correct = Soap_class(msisdn=self.msisdn, path_to_file=self.path_to_file).main()
+
+if __name__ == "__main__":
+    path_to_file = 'complaints_correction/storage_xml/odbgprs.xml'
+    msisdn_to_correct = Soap_class(msisdn="237663744490", path_to_file=path_to_file).main()

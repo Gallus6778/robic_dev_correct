@@ -1,0 +1,236 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ENTER USERNAME <  CHATBO
+
+ENTER PASSWORD <  **********
+
+SGSN      YASG01                    2021-07-07  09:46:50
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                       WELCOME TO THE DX 200 SERIES DIALOGUE
+
+
+
+
+
+MAIN LEVEL COMMAND <___>
+<  ZMMI:MSISDN=237664398097:;
+
+
+LOADING PROGRAM VERSION 13.16-0
+
+SGSN      YASG01                    2021-07-07  09:46:50
+
+        SUBSCRIBER STATE INFORMATION:
+
+        INTERNATIONAL MOBILE SUBSCRIBER IDENTITY ...... 624042747392233 
+        MOBILE SUBSCRIBER INTERNATIONAL ISDN NUMBER ... 237664398097    
+        PACKET TEMPORARY MOBILE SUBSCRIBER IDENTITY ... N/A 
+        RADIO ACCESS TYPE ............................. UTRAN
+        MM STATE ...................................... DETACHED      
+        INTERNAL STATE ................................ FFH / NULL          
+        CONTROL PLANE PAPU UNIT INDEX ................. 0
+        GN SGSN ADDRESS FOR SIGNALLING (IPV4) ......... 041.244.252.004
+
+COMMAND EXECUTED
+
+
+VISITING GPRS SUBSCRIBER DATA HANDLING COMMAND <MM_>
+<  ZMMO:MSISDN=237664398097:;
+
+LOADING PROGRAM VERSION 13.16-0
+
+SGSN      YASG01                    2021-07-07  09:46:50
+
+        SUBSCRIBER INFORMATION:
+
+        INTERNATIONAL MOBILE SUBSCRIBER IDENTITY ...... 624042747392233 
+        MOBILE SUBSCRIBER INTERNATIONAL ISDN NUMBER ... 237664398097    
+        SERVING SMMU UNIT INDEX ....................... 01
+        NETWORK ACCESS MODE ........................... BOTH GSM AND GPRS
+        RADIO ACCESS TYPE ............................. UTRAN
+        TERMINAL TYPE ................................. GPRS AND UMTS
+        SUBS ACCESS CAPABILITY (HLR PROFILE) .......... GPRS ONLY
+        LA MOBILE COUNTRY CODE ........................ 624
+        LA MOBILE NETWORK CODE ........................ 04 
+        LOCATION AREA CODE ............................ 7725H/30501D
+        SERVICE AREA CODE ............................. 29CFH/10703D
+        ROUTING AREA CODE ............................. 01H/001D
+        CELL IDENTITY ................................. 00000D
+        DRX PARAMETER
+          SPLIT PG CYCLE CODE ......................... 10 
+          NON DRX TIMER ...............................  0
+          SPLIT ON CCCH ............................... N
+        NETWORK CAPABILITY
+          CIPHERING ALGORITHM ......................... GEA3
+          SM CAPABILITIES VIA DEDICATED CHANNELS ...... Y
+          SM CAPABILITIES VIA GPRS CHANNELS ........... Y
+          UCS2 SUPPORT ................................ Y
+          SS SCREENING INDICATOR ...................... 1  
+        GPRS DETACH DATE .............................. 07.07 09:45
+        GPRS DETACH FLAG .............................. ON
+        MOBILE NOT REACHABLE FOR GPRS FLAG (MNRG)...... OFF
+        NON-GPRS ALERT FLAG (NGAF)..................... OFF
+        CIRCUIT SWITCHED CALL FLAG .................... OFF
+        GERAN RESTRICTED............................... N
+        UTRAN RESTRICTED............................... N
+        ROAMING RESTRICTED............................. N
+        CHARGING CHARACTERISTICS....................... 0100
+        HLR-ADDRESS
+          GLOBAL TITLE ................................ 237660009001      
+          NUMBERING PLAN .............................. E.164           
+          NATURE OF ADDRESS ........................... INT             
+        VLR-ADDRESS ................................... NO ASSOCIATION
+
+        SHORT MESSAGE SERVICE
+          MT-SHORT MESSAGE POINT TO POINT (T21)........ OFF
+          MO-SHORT MESSAGE POINT TO POINT (T22)........ OFF
+
+COMMAND EXECUTED
+
+
+VISITING GPRS SUBSCRIBER DATA HANDLING COMMAND <MM_>
+<  ZMMS:MSISDN=237664398097:;
+
+LOADING PROGRAM VERSION 13.16-0
+
+SGSN      YASG01                    2021-07-07  09:46:50
+
+   IMSI ... INTERNATIONAL MOBILE SUBSCRIBER IDENTITY ...... 624042747392233 
+
+
+   OPERATOR DETERMINED BARRING DATA:
+
+   BAOC ... BARRING OF ALL OUTGOING CALLS ........................ N
+   BOIC ... BARRING OF OUTGOING INTERNATIONAL CALLS .............. N
+   BOIH ... BARRING OF OUTGOING INTERNATIONAL CALLS EXCEPT
+            THOSE DIRECTED TO THE HOME PLMN COUNTRY .............. N
+
+   BOS1 ... OPERATOR SPECIFIC BARRING CATEGORY 1 ................. N
+   BOS2 ... OPERATOR SPECIFIC BARRING CATEGORY 2 ................. N
+   BOS3 ... OPERATOR SPECIFIC BARRING CATEGORY 3 ................. N
+   BOS4 ... OPERATOR SPECIFIC BARRING CATEGORY 4 ................. N
+
+
+
+   PDP CONTEXTS:
+
+
+   PDP CONTEXT ID ..............................   1
+   PDP ADDRESS TYPE ............................ IPv4
+   PDP ADDRESS ................................. DYNAMIC
+
+   QOS PROFILE VERSION ........................ REL7
+   DELIVERY OF ERRONEOUS SDU .................. Y
+   DELIVERY ORDER ............................. Y
+   TRAFFIC CLASS .............................. I
+   MAXIMUM SDU SIZE ........................... 1400
+   MAXIMUM BITRATE FOR UPLINK ................. 8700  
+   MAXIMUM BITRATE FOR DOWNLINK ............... 42000 
+   SDU ERROR RATIO ............................ 6
+   RESIDUAL BER ............................... 7
+   TRAFFIC HANDLING PRIORITY .................. 3   
+   TRANSFER DELAY ............................. 1000
+   GUARANTEED BITRATE FOR UPLINK .............. 8700  
+   GUARANTEED BITRATE FOR DOWNLINK ............ 14000 
+   ALLOCATION/RETENTION PRIORITY .............. 3   
+   SOURCE STATISTICS DESCRIPTOR ............... 0   
+   SIGNALLING INDICATION ...................... 0   
+   APN ......................................... n-internet                    
+   VPLMN ALLOWED ............................... Y
+
+   PDP CONTEXT ID ..............................   3
+   PDP ADDRESS TYPE ............................ IPv4
+   PDP ADDRESS ................................. DYNAMIC
+
+   QOS PROFILE VERSION ........................ REL7
+   DELIVERY OF ERRONEOUS SDU .................. Y
+   DELIVERY ORDER ............................. Y
+   TRAFFIC CLASS .............................. I
+   MAXIMUM SDU SIZE ........................... 1400
+   MAXIMUM BITRATE FOR UPLINK ................. 8700  
+   MAXIMUM BITRATE FOR DOWNLINK ............... 42000 
+   SDU ERROR RATIO ............................ 6
+   RESIDUAL BER ............................... 7
+   TRAFFIC HANDLING PRIORITY .................. 3   
+   TRANSFER DELAY ............................. 1000
+   GUARANTEED BITRATE FOR UPLINK .............. 8700  
+   GUARANTEED BITRATE FOR DOWNLINK ............ 14000 
+   ALLOCATION/RETENTION PRIORITY .............. 3   
+   SOURCE STATISTICS DESCRIPTOR ............... 0   
+   SIGNALLING INDICATION ...................... 0   
+   APN ......................................... n-mms                         
+   VPLMN ALLOWED ............................... Y
+
+   PDP CONTEXT ID ..............................   2
+   PDP ADDRESS TYPE ............................ IPv4
+   PDP ADDRESS ................................. DYNAMIC
+
+   QOS PROFILE VERSION ........................ REL7
+   DELIVERY OF ERRONEOUS SDU .................. Y
+   DELIVERY ORDER ............................. Y
+   TRAFFIC CLASS .............................. I
+   MAXIMUM SDU SIZE ........................... 1400
+   MAXIMUM BITRATE FOR UPLINK ................. 8700  
+   MAXIMUM BITRATE FOR DOWNLINK ............... 42000 
+   SDU ERROR RATIO ............................ 6
+   RESIDUAL BER ............................... 7
+   TRAFFIC HANDLING PRIORITY .................. 3   
+   TRANSFER DELAY ............................. 1000
+   GUARANTEED BITRATE FOR UPLINK .............. 8700  
+   GUARANTEED BITRATE FOR DOWNLINK ............ 14000 
+   ALLOCATION/RETENTION PRIORITY .............. 3   
+   SOURCE STATISTICS DESCRIPTOR ............... 0   
+   SIGNALLING INDICATION ...................... 0   
+   APN ......................................... n-wap                         
+   VPLMN ALLOWED ............................... Y
+
+COMMAND EXECUTED
+
+
+VISITING GPRS SUBSCRIBER DATA HANDLING COMMAND <MM_>
+<  Z;
+
+MAIN LEVEL COMMAND <___>
+<  ZZ;
+
+
+END OF DIALOGUE SESSION
+

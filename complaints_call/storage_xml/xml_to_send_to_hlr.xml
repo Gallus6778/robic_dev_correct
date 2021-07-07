@@ -4,7 +4,7 @@
          <version>HLR_SUBSCRIBER_v45</version>
          <base>
             <objectclass>Subscriber</objectclass>
-            <alias name="msisdn" value="237669595858" />
+            <alias name="msisdn" value="236663970749" />
          </base>
       </ns1:searchRequest>
    </ns0:Body>

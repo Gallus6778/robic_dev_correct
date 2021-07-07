@@ -187,6 +187,13 @@ def internet_complaints():
             # ============================= Correction du probleme ===========================
             subscriber_info = provide_decision()
             info_parameter = subscriber_info.main()
+
+            print("Data found : ")
+            print(msisdn_info_results)
+
+            print("Resolution : ")
+            print(info_parameter)
+
             return render_template("complaints_internet/index.html",
                                    radio_access_type=radio_access_type,
                                    pdp_state=pdp_state,
@@ -243,6 +250,9 @@ def call_complaints():
 
             # Proposition de solutions
             decision = Check_hlr_info_and_provide_decision().main()
+
+            print(msisdn_info_results)
+            print(decision)
 
             return render_template("complaints_call/index.html",
                                    decision=decision,

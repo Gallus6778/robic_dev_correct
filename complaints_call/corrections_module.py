@@ -45,7 +45,7 @@ class Check_hlr_info_and_provide_decision:
                 if subscriber_info["odboc"] != "0" or subscriber_info["odboc"] == "None":
                     if subscriber_info["odboc"] != "0" and subscriber_info["odboc"] != "None":
                         Oboc(msisdn=subscriber_info['msisdn']).main()
-                        self.info_parameter["odboc"] = "Barring oc in HLR"
+                        self.info_parameter["odboc"] = "Barring oc solved"
                 #
                 for keys, value in subscriber_exists_in_msc.items():
                     if value == 'KNOWN SUBSCRIBER':
@@ -58,7 +58,7 @@ class Check_hlr_info_and_provide_decision:
                 if subscriber_info["odbic"] != "0" or subscriber_info["odbic"] == "None":
                     if subscriber_info["odbic"] != "0" and subscriber_info["odbic"] != "None":
                         Obic(msisdn=subscriber_info['msisdn']).main()
-                        self.info_parameter["odbic"] = "Barring ic in HLR"
+                        self.info_parameter["odbic"] = "Barring ic solved"
                 #
                 if subscriber_info["odbr"] != "0" or subscriber_info["odbr"] == "None":
                     if subscriber_info["odbr"] != "0" and subscriber_info["odbr"] != "None":
